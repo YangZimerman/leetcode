@@ -6,6 +6,7 @@
 
 // @lc code=start
 // 暴力解法 2^n
+// 递归？
 /**
  * @param {number[]} nums
  * @return {number}
@@ -17,11 +18,13 @@ function getSum(nums) {
     });
     return sum;
 }
+
 /**
+ * 暴力解法
  * @param {number[]} nums
  * @return {boolean}
  */
-var canPartition = function (nums) {
+var canPartitionExhaustion = function (nums) {
     const targetNum = getSum(nums) / 2;
     let resArr = [];
     let isFinded = false;
@@ -47,6 +50,24 @@ var canPartition = function (nums) {
         resArr.push(num);
     }
     return isFinded;
+};
+
+
+/**
+ * 递归方法
+ * @param {number[]} nums
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+function Recursion(nums, targetSum) {
+    // nums.
+}
+/**
+ * 递归
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canPartition = function (nums) {
 };
 // @lc code=end
 
