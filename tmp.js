@@ -114,10 +114,31 @@ function canSumTargetRecursion(nums, targetSum) {
         }
     }
     // 和小 单大
-    if (getSum(nums) < targetSum) {
-        return false;
+    // if (
+    //     getSum(nums) < targetSum
+    //     || !nums.find(item => item <= targetSum)
+    // ) {
+    //     return false;
+    // }
+    let sum = 0;
+    let res = false;
+    let isAllItemBiggerThanTarget = true;
+    for (let i = 0; i < nums.length; i++) {
+        const item = nums[i];
+        if (item === targetSum) {
+            res = true;
+            break;
+        } else if (isAllItemBiggerThanTarget && item < targetSum) {
+            isAllItemBiggerThanTarget = false;
+        }
+        sum += item;
     }
-    const res = canSumTargetRecursion(nums.slice(1), targetSum) || canSumTargetRecursion(nums.slice(1), targetSum - nums[0]);
+    // if (sum < targetSum || isAllItemBiggerThanTarget) {
+    //     console.log('yes', sum < targetSum, isAllItemBiggerThanTarget);
+    // }
+    if (!(sum < targetSum || isAllItemBiggerThanTarget) && !res) {
+        res = canSumTargetRecursion(nums.slice(1), targetSum - nums[0]) || canSumTargetRecursion(nums.slice(1), targetSum);
+    }
     canSumTargetRecursionCache[cacheKey] = res;
     // console.log(`储存 ${cacheKey} ${Object.keys(canSumTargetRecursionCache).length}`);
     return res;
@@ -129,12 +150,21 @@ function canSumTargetRecursion(nums, targetSum) {
  */
 var canPartition = function (nums) {
     const targetNum = getSum(nums) / 2;
-    const res= canSumTargetRecursion(nums, targetNum);
+    Number.isInteger(targetNum)
+    // 没想到该特殊情况
+    if (!Number.isInteger(targetNum)) {
+        return false;
+    }
+    const res = canSumTargetRecursion(nums, targetNum);
+    // @test
+    // console.log(canSumTargetRecursionCache);
+    // console.log(Object.keys(canSumTargetRecursionCache).length);
     canSumTargetRecursionCache = {};
     return res;
 };
 // @lc code=end
 
 
-// console.log(canPartition([100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 99, 97]));
-// console.log(canPartition([55, 12, 96, 65, 70, 64, 80, 17, 98, 12, 75, 11, 55, 56, 77, 58, 69, 17, 28, 53, 49, 45, 87, 89, 86, 19, 40, 5, 80, 85, 14, 27, 94, 38, 12, 71, 45, 51, 49, 38, 35, 5, 68, 95, 96, 49, 84, 56, 74, 18, 45, 56, 41, 84, 46, 64, 75, 17, 15, 51, 96, 79, 94, 26, 85, 51, 23, 65, 53, 81, 59, 46, 35, 69, 32, 3, 33, 33, 71, 72, 1, 18, 9, 8, 66, 14, 99, 50, 61, 78, 52, 60, 39, 20, 34, 89, 73, 17, 68, 1]));
+console.time('416');
+console.log(canPartition([97, 13, 81, 9, 28, 32, 97, 52, 20, 86, 13, 93, 35, 36, 54, 39, 99, 42, 23, 74, 90, 54, 49, 20, 76, 67, 73, 71, 79, 8, 3, 79, 32, 16, 24, 36, 28, 74, 65, 38, 100, 48, 19, 83, 12, 39, 10, 46, 43, 3, 40, 65, 6, 97, 55, 68, 73, 15, 64, 82, 47, 99, 19, 64, 99, 89, 55, 81, 71, 15, 23, 51, 99, 62, 26, 34, 73, 28, 71, 86, 72, 66, 95, 61, 71, 23, 66, 15, 11, 61, 34, 82, 13, 71, 16, 46, 99, 88, 44, 2]));
+console.timeEnd('416');
