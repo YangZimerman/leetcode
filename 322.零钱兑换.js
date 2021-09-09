@@ -10,7 +10,7 @@
  * @param {number} amount
  * @return {number}
  */
-var coinChangeOld = function (coins, amount) {
+ var coinChangeOld = function (coins, amount) {
     if (amount === 0) {
         return 0;
     }

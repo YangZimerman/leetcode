@@ -151,7 +151,7 @@ function canSumTargetRecursion(nums, targetSum) {
 var canPartition = function (nums) {
     const targetNum = getSum(nums) / 2;
     Number.isInteger(targetNum)
-    // 没想到该特殊情况
+    // @mark 没想到该特殊情况
     if (!Number.isInteger(targetNum)) {
         return false;
     }
