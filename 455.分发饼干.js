@@ -10,7 +10,7 @@
  * @param {number[]} s
  * @return {number}
  */
-var findContentChildren = function (g, s) {
+ var findContentChildren = function (g, s) {
     g.sort((a, b) => {
         return a - b;
     });
