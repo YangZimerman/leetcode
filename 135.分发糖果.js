@@ -5,11 +5,35 @@
  */
 
 // @lc code=start
+
+// @mark 更好、更简单的解法 左右扫描一次
 /**
  * @param {number[]} ratings
  * @return {number}
  */
-var candy = function (ratings) {
+ var candy = function (ratings) {
+    let resArr = new Array(ratings.length);
+    resArr.fill(1);
+    for (let i = 1; i < resArr.length; i++) {
+        if (ratings[i] > ratings[i - 1]) {
+            resArr[i] = resArr[i - 1] + 1;
+        }
+    }
+    for (let i = resArr.length - 2; i > -1; i--) {
+        if (ratings[i] > ratings[i + 1] && resArr[i] <= resArr[i + 1]) {
+            resArr[i] = resArr[i + 1] + 1;
+        }
+    }
+    return resArr.reduce((pre, cur) => {
+        return pre + cur;
+    }, 0)
+};
+
+/**
+ * @param {number[]} ratings
+ * @return {number}
+ */
+var oldCandy = function (ratings) {
     if (ratings.length <= 1) {
         return 1;
     }
