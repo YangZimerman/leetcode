@@ -10,7 +10,7 @@
  * @param {number[][]} intervals
  * @return {number}
  */
-var eraseOverlapIntervals= function (intervals) {
+ var eraseOverlapIntervals= function (intervals) {
     intervals = intervals.sort((a, b) => {
         return a[1] !== b[1] ? a[1] - b[1] : a[0] - b[0];
     });
