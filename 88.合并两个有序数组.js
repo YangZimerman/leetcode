@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+// @mark 参考解决方法 是将指针放到数组末尾
 /**
  * @param {number[]} nums1
  * @param {number} m
