@@ -18,7 +18,7 @@ var merge = function (nums1, m, nums2, n) {
     }
 
     let i = 0, j = 0;
-    // m 或 m+n 边界值问题
+    // i的 m 或 m+n 边界值问题
     while (i < m + j && j < n) {
         if (nums1[i] >= nums2[j]) {
             // ?
